@@ -97,6 +97,8 @@ fn parse_command(s: &str) -> Result<Command, Box<dyn std::error::Error>> {
         "MoveWindowToLastWorkspace" => Ok(Command::MoveWindowToLastWorkspace),
         "MoveWindowToNextWorkspace" => Ok(Command::MoveWindowToNextWorkspace),
         "MoveWindowToPreviousWorkspace" => Ok(Command::MoveWindowToPreviousWorkspace),
+        "MoveWindowToNextTag" => Ok(Command::MoveWindowToNextTag),
+        "MoveWindowToPreviousTag" => Ok(Command::MoveWindowToPreviousTag),
         "FloatingToTile" => Ok(Command::FloatingToTile),
         "TileToFloating" => Ok(Command::TileToFloating),
         "ToggleFloating" => Ok(Command::ToggleFloating),

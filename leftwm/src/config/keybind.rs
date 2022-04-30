@@ -81,6 +81,8 @@ impl Keybind {
             BaseCommand::MoveWindowToPreviousWorkspace => {
                 leftwm_core::Command::MoveWindowToPreviousWorkspace
             }
+            BaseCommand::MoveWindowToNextTag => leftwm_core::Command::MoveWindowToNextTag,
+            BaseCommand::MoveWindowToPreviousTag => leftwm_core::Command::MoveWindowToPreviousTag,
             BaseCommand::MouseMoveWindow => leftwm_core::Command::MouseMoveWindow,
             BaseCommand::NextLayout => leftwm_core::Command::NextLayout,
             BaseCommand::PreviousLayout => leftwm_core::Command::PreviousLayout,

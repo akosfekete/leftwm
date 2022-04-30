@@ -58,6 +58,8 @@ async fn main() -> Result<()> {
         MoveWindowToLastWorkspace
         MoveWindowToNextWorkspace
         MoveWindowToPreviousWorkspace
+        MoveWindowToNextTag
+        MoveWindowToPreviousTag
         FloatingToTile
         TileToFloating
         ToggleFloating

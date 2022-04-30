@@ -59,6 +59,8 @@ fn process_internal<C: Config, SERVER: DisplayServer>(
         Command::SendWindowToTag { window, tag } => move_to_tag(*window, *tag, manager),
         Command::MoveWindowToNextWorkspace => move_window_to_workspace_change(manager, 1),
         Command::MoveWindowToPreviousWorkspace => move_window_to_workspace_change(manager, -1),
+        Command::MoveWindowToNextTag => move_window_to_tag_change(manager, 1),
+        Command::MoveWindowToPreviousTag => move_window_to_tag_change(manager, -1),
         Command::MoveWindowUp => move_focus_common_vars!(move_window_change(state, -1)),
         Command::MoveWindowDown => move_focus_common_vars!(move_window_change(state, 1)),
         Command::MoveWindowTop { swap } => move_focus_common_vars!(move_window_top(state, *swap)),
@@ -289,6 +291,17 @@ fn move_window_to_workspace_change<C: Config, SERVER: DisplayServer>(
 
     let tag_num = workspace.tags.first()?;
     move_to_tag(None, *tag_num, manager)
+}
+
+fn move_window_to_tag_change<C: Config, SERVER: DisplayServer>(
+    manager: &mut Manager<C, SERVER>,
+    delta: i32,
+) -> Option<bool> {
+    let current_tag = manager.state.focus_manager.tag(0).unwrap_or_default();
+    let tags = manager.state.tags.normal();
+    let relative_tag_id =
+        relative_find(tags, |tag| tag.id == current_tag, delta, true).map(|tag| tag.id)?;
+    move_to_tag(None, relative_tag_id, manager)
 }
 
 fn goto_tag(state: &mut State, input_tag: TagId, current_tag_swap: bool) -> Option<bool> {
